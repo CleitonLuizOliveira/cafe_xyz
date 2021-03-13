@@ -4,6 +4,7 @@ import TopButtons from './components/TopButtons';
 import TotalValue from './components/TotalValue';
 
 function App() {
+
   return (
     <div className="App">
       <h1>Café XYZ</h1>
