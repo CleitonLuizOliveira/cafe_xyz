@@ -5,7 +5,7 @@ function Product(props) {
             <img src={props.image} alt={props.name}/>
             <h3>{props.name}</h3>
             <h4>R$ {props.price?.toFixed(2).toString().replace('.',',')}</h4>
-            <button>adicionar</button>
+            <button onClick={() => props.addToOrder({name: props.name, amount: 1, price: props.price})}>adicionar</button>
         </div>
     );
 }

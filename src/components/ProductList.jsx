@@ -1,6 +1,6 @@
 import Product from './Product';
 
-function ProductList() {
+function ProductList(props) {
 
     const coffeeList = [
         {
@@ -23,7 +23,7 @@ function ProductList() {
     return (
         <div className="ProductList">
             {coffeeList.map((coffee) => (
-                <Product image={coffee.image} name={coffee.name} price={coffee.price} key={coffee.name}/>
+                <Product image={coffee.image} name={coffee.name} price={coffee.price} key={coffee.name} addToOrder={props.addToOrder} />
             ))}
         </div>
     );

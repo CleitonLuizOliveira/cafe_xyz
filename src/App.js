@@ -40,9 +40,7 @@ function App() {
         <div className="App">
             <h1>Café XYZ</h1>
             <TopButtons />
-            <ProductList />
-            <button onClick={() => addToOrder({name: "cappuccino", amount: 1, price: 16.99})}>Adicionar Cappucino</button>
-            <button onClick={() => removeFromOrder("cappuccino")} >Remover Cappucino</button>
+            <ProductList addToOrder={addToOrder} removeFromOrder={removeFromOrder}/>
             <TotalValue order={order} addToOrder={addToOrder} removeFromOrder={removeFromOrder}/>
         </div>
     );
