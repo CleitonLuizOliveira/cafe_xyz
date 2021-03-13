@@ -5,8 +5,9 @@ import TotalValue from './components/TotalValue';
 function App() {
   return (
     <div className="App">
-      <h1>Café XYZ</h1>
+      <h1>Cardápio Café XYZ</h1>
       <ProductList />
+      <TotalValue />
     </div>
   );
 }

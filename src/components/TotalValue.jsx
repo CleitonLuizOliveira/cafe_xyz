@@ -2,7 +2,7 @@
 function TotalValue() {
     return (
         <div className="TotalValue">
-            <p>Sou uma janelinha ali embaixo</p>
+            <p>Faça seu pedido no cardápio acima</p>
         </div>
     );
 }
