@@ -81,4 +81,70 @@
   color: white;
   bottom: 0;
   box-shadow: 0px -2px 5px rgba(0,0,0,0.3);
+  padding-top: 10px;
+}
+
+.TotalValue .orders {
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+  place-items: center;
+}
+
+.TotalValue .order_item {
+  margin: 10px;
+  display: flex;
+}
+
+.TotalValue .order_item legend {
+  margin-right: 10px;
+}
+
+.TotalValue .order_item button {
+  background-color: greenyellow;
+  border: none;
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.TotalValue .order_item button:hover {
+  opacity: 0.7;
+}
+
+.TotalValue .order_item button:nth-of-type(2) {
+  background-color: tomato;
+  color: white;
+  margin-left: 5px;
+}
+
+.TotalValue .close_order {
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
+
+.TotalValue .close_order button {
+  background-color: greenyellow;
+  border: none;
+  margin-left: 30px;
+  padding: 12px 30px;
+  border-radius: 9px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.TotalValue .close_order button:hover {
+  color: white;
+  background-color: green;
+}
+
+.TotalValue .close_order button:disabled {
+  opacity: 0.3;
+  background-color: greenyellow;
+  color: black;
+  cursor: default;
 }

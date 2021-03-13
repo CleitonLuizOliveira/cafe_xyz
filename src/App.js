@@ -6,7 +6,7 @@ import TotalValue from './components/TotalValue';
 
 function App() {
 
-    const [order, setOrder] = useState({items: [{name: "cafézinho", amount: 1, price: 3.99}], total: 0});
+    const [order, setOrder] = useState({items: [], total: 0});
 
     useEffect(() => {
         let tempTotal = 0;
