@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import If from './If';
 
 function TotalValue(props) {

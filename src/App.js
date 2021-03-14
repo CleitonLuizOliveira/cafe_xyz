@@ -68,7 +68,7 @@ function App() {
     function sendOrder() {
         const date = new Date();
         setShowCreditCard(false);
-        dataBase.collection('orders').doc(`R$ ${order.total.toFixed(2)} - ${date.toString()}`).set(order);
+        dataBase.collection('orders').doc(`${date.toString()} - R$ ${order.total.toFixed(2)}`).set({...order, date: date});
         setShowConfirmation(true);
         setOrder({items: [], total: 0, observation: ""});
     }
