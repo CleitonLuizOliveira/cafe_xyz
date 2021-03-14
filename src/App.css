@@ -156,6 +156,13 @@
   cursor: default;
 }
 
+.TotalValue textarea {
+  width: 260px;
+  padding: 12px;
+  resize: none;
+  font-family: inherit;
+}
+
 .CreditCard {
   position: fixed;
   top: 0;

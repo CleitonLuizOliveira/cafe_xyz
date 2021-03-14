@@ -13,7 +13,7 @@ function App() {
     const dataBase = Firebase.firestore();
 
     const [coffeeList, setCoffeeList] = useState({loading: false, items: null});
-    const [order, setOrder] = useState({items: [], total: 0});
+    const [order, setOrder] = useState({items: [], total: 0, observation: ""});
     const [showCreditCard, setShowCreditCard] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -46,6 +46,7 @@ function App() {
         } else {
             setOrder({items: [...order.items, item]});
         }    
+        setShowConfirmation(false);
     }
 
     function removeFromOrder(itemName) {    
@@ -54,6 +55,10 @@ function App() {
         );
         const filteredArray = tempArray.filter(item => item.amount > 0);
         setOrder({items: filteredArray});
+    }
+
+    function setOrderObservation(newObservation) {
+        setOrder({items: order.items, total: order.total, observation: newObservation});
     }
 
     function closeOrder() {
@@ -65,7 +70,7 @@ function App() {
         setShowCreditCard(false);
         dataBase.collection('orders').doc(`R$ ${order.total.toFixed(2)} - ${date.toString()}`).set(order);
         setShowConfirmation(true);
-        setOrder({items: [], total: 0});
+        setOrder({items: [], total: 0, observation: ""});
     }
 
 
@@ -79,7 +84,7 @@ function App() {
             <If test={showCreditCard}>
                 <CreditCard sendOrder={sendOrder} />
             </If>               
-            <TotalValue order={order} addToOrder={addToOrder} removeFromOrder={removeFromOrder} closeOrder={closeOrder}/>
+            <TotalValue order={order} addToOrder={addToOrder} removeFromOrder={removeFromOrder} closeOrder={closeOrder} setOrderObservation={setOrderObservation}/>
             <If test={showConfirmation}>
                 <Confirmation />
             </If>
