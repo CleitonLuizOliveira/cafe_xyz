@@ -3,10 +3,20 @@ import './App.css';
 import ProductList from './components/ProductList';
 import TopButtons from './components/TopButtons';
 import TotalValue from './components/TotalValue';
+import Firebase from './components/Firebase';
+import If from './components/If';
 
 function App() {
 
+    const dataBase = Firebase.firestore();
+
+    const [coffeeList, setCoffeeList] = useState({loading: false, items: null});
     const [order, setOrder] = useState({items: [], total: 0});
+
+    useEffect(() => {
+        getCoffeeList();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         let tempTotal = 0;
@@ -15,6 +25,13 @@ function App() {
         });
         setOrder({items: order.items, total: tempTotal});
     }, [order.items]);
+
+    async function getCoffeeList() {
+        setCoffeeList({ loading: true});
+        const snapshot = await dataBase.collection('coffees').get()
+        const tempArray = snapshot.docs.map(doc => doc.data());        
+        setCoffeeList({ loading: false, items: tempArray});
+    }
 
     function addToOrder(item) {    
         if(order.items.some(orderItem => orderItem.name === item.name)) {
@@ -40,7 +57,9 @@ function App() {
         <div className="App">
             <h1>Café XYZ</h1>
             <TopButtons />
-            <ProductList addToOrder={addToOrder} removeFromOrder={removeFromOrder}/>
+            <If test={coffeeList.items}>
+                <ProductList coffeeList={coffeeList} addToOrder={addToOrder} removeFromOrder={removeFromOrder}/>
+            </If>            
             <TotalValue order={order} addToOrder={addToOrder} removeFromOrder={removeFromOrder}/>
         </div>
     );
