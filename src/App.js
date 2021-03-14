@@ -11,7 +11,9 @@ import If from './components/If';
 function App() {
 
     const dataBase = Firebase.firestore();
+    const screens = { menu: "menu", admin: "admin" };
 
+    const [activeScreen, setActiveScreen] = useState(screens.menu);
     const [coffeeList, setCoffeeList] = useState({loading: false, items: null});
     const [order, setOrder] = useState({items: [], total: 0, observation: ""});
     const [showCreditCard, setShowCreditCard] = useState(false);
@@ -65,6 +67,10 @@ function App() {
         setShowCreditCard(true);
     }
 
+    function changeScreen(screen) {
+        setActiveScreen(screen);
+    }
+
     function sendOrder() {
         const date = new Date();
         setShowCreditCard(false);
@@ -77,17 +83,23 @@ function App() {
     return (
         <div className="App">
             <h1>Café XYZ</h1>
-            <TopButtons />
-            <If test={coffeeList.items}>
-                <ProductList coffeeList={coffeeList} addToOrder={addToOrder} removeFromOrder={removeFromOrder}/>
-            </If>         
-            <If test={showCreditCard}>
-                <CreditCard sendOrder={sendOrder} />
-            </If>               
-            <TotalValue order={order} addToOrder={addToOrder} removeFromOrder={removeFromOrder} closeOrder={closeOrder} setOrderObservation={setOrderObservation}/>
-            <If test={showConfirmation}>
-                <Confirmation />
+            <TopButtons activeScreen={activeScreen} screens={screens} changeScreen={changeScreen}/>
+            <If test={activeScreen === screens.menu }>                
+                <If test={coffeeList.items}>
+                    <ProductList coffeeList={coffeeList} addToOrder={addToOrder} removeFromOrder={removeFromOrder}/>
+                </If>         
+                <If test={showCreditCard}>
+                    <CreditCard sendOrder={sendOrder} />
+                </If>               
+                <TotalValue order={order} addToOrder={addToOrder} removeFromOrder={removeFromOrder} closeOrder={closeOrder} setOrderObservation={setOrderObservation}/>
+                <If test={showConfirmation}>
+                    <Confirmation />
+                </If>
             </If>
+            <If test={activeScreen === screens.admin }>   
+                <h2>Sou o admin</h2>
+            </If>
+            
         </div>
     );
 }

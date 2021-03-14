@@ -15,8 +15,6 @@
   width: 96vw;
   margin: auto;
   place-content: space-between;
-  display: none;
-
 }
 
 .TopButtons button {
@@ -132,12 +130,13 @@
   display: flex;
   place-content: center;
   place-items: center;
+  flex-wrap: wrap;
 }
 
 .TotalValue .close_order button {
   background-color: greenyellow;
   border: none;
-  margin-left: 30px;
+  margin: 0 30px;
   padding: 12px 30px;
   border-radius: 9px;
   font-weight: bold;
