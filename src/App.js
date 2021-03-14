@@ -5,6 +5,7 @@ import TopButtons from './components/TopButtons';
 import TotalValue from './components/TotalValue';
 import Firebase from './components/Firebase';
 import CreditCard from './components/CreditCard';
+import Confirmation from './components/Confirmation';
 import If from './components/If';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     const [coffeeList, setCoffeeList] = useState({loading: false, items: null});
     const [order, setOrder] = useState({items: [], total: 0});
     const [showCreditCard, setShowCreditCard] = useState(false);
+    const [showConfirmation, setShowConfirmation] = useState(false);
 
     useEffect(() => {
         getCoffeeList();
@@ -62,6 +64,8 @@ function App() {
         const date = new Date();
         setShowCreditCard(false);
         dataBase.collection('orders').doc(`R$ ${order.total.toFixed(2)} - ${date.toString()}`).set(order);
+        setShowConfirmation(true);
+        setOrder({items: [], total: 0});
     }
 
 
@@ -76,6 +80,9 @@ function App() {
                 <CreditCard sendOrder={sendOrder} />
             </If>               
             <TotalValue order={order} addToOrder={addToOrder} removeFromOrder={removeFromOrder} closeOrder={closeOrder}/>
+            <If test={showConfirmation}>
+                <Confirmation />
+            </If>
         </div>
     );
 }

@@ -1,3 +1,10 @@
+@keyframes ConfirmationMove {
+  0%   {right: -200px;}
+  25%  {right: 0;}
+  75%  {right: 0;}
+  100% {right: -200px;}
+}
+
 .App {
   text-align: center;
   position: relative;
@@ -187,4 +194,16 @@
 .CreditCard button:hover {
   background-color: green;
   color: white;
+}
+
+.Confirmation {
+  background-color: black;
+  color: white;
+  position: fixed;
+  padding: 30px;
+  top: 0;
+  right: -200px;
+  box-shadow: 1px -1px 5px rgba(0, 0, 0, 0.3);
+  animation-name: ConfirmationMove;
+  animation-duration: 4s;
 }
