@@ -148,3 +148,43 @@
   color: black;
   cursor: default;
 }
+
+.CreditCard {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  place-items: center;
+  z-index: 100;
+}
+
+.CreditCard form {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+
+.CreditCard form input {
+  margin: 2px;
+  padding: 6px;
+}
+
+.CreditCard button {
+  background-color: greenyellow;
+  margin-top: 20px;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.CreditCard button:hover {
+  background-color: green;
+  color: white;
+}

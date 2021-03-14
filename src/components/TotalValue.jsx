@@ -12,7 +12,7 @@ function TotalValue(props) {
             </If>          
             <div className="orders">
                 {items.map(item => (
-                    <div className="order_item">
+                    <div className="order_item" key={item.name}>
                         <legend>{item.name} x{item.amount}</legend>
                         <button onClick={() => props.addToOrder(item)}>+</button>
                         <button onClick={() => props.removeFromOrder(item.name)}>-</button>
@@ -21,7 +21,7 @@ function TotalValue(props) {
             </div>     
             <div className="close_order">
                 <h1>R$ {total?.toFixed(2).toString().replace('.',',')}</h1>   
-                <button disabled={total === 0}>Fechar Pedido</button>
+                <button disabled={total === 0} onClick={props.closeOrder}>Fechar Pedido</button>
             </div>
             
         </div>

@@ -4,6 +4,7 @@ import ProductList from './components/ProductList';
 import TopButtons from './components/TopButtons';
 import TotalValue from './components/TotalValue';
 import Firebase from './components/Firebase';
+import CreditCard from './components/CreditCard';
 import If from './components/If';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
 
     const [coffeeList, setCoffeeList] = useState({loading: false, items: null});
     const [order, setOrder] = useState({items: [], total: 0});
+    const [showCreditCard, setShowCreditCard] = useState(false);
 
     useEffect(() => {
         getCoffeeList();
@@ -52,6 +54,16 @@ function App() {
         setOrder({items: filteredArray});
     }
 
+    function closeOrder() {
+        setShowCreditCard(true);
+    }
+
+    function sendOrder() {
+        const date = new Date();
+        setShowCreditCard(false);
+        dataBase.collection('orders').doc(`R$ ${order.total.toFixed(2)} - ${date.toString()}`).set(order);
+    }
+
 
     return (
         <div className="App">
@@ -59,8 +71,11 @@ function App() {
             <TopButtons />
             <If test={coffeeList.items}>
                 <ProductList coffeeList={coffeeList} addToOrder={addToOrder} removeFromOrder={removeFromOrder}/>
-            </If>            
-            <TotalValue order={order} addToOrder={addToOrder} removeFromOrder={removeFromOrder}/>
+            </If>         
+            <If test={showCreditCard}>
+                <CreditCard sendOrder={sendOrder} />
+            </If>               
+            <TotalValue order={order} addToOrder={addToOrder} removeFromOrder={removeFromOrder} closeOrder={closeOrder}/>
         </div>
     );
 }
