@@ -6,6 +6,8 @@ import TotalValue from './components/TotalValue';
 import Firebase from './components/Firebase';
 import CreditCard from './components/CreditCard';
 import Confirmation from './components/Confirmation';
+import OrderList from './components/OrderList';
+import CreteMenuItem from './components/CreteMenuItem';
 import If from './components/If';
 
 function App() {
@@ -15,12 +17,14 @@ function App() {
 
     const [activeScreen, setActiveScreen] = useState(screens.menu);
     const [coffeeList, setCoffeeList] = useState({loading: false, items: null});
+    const [orderList, setOrderList] = useState({loading: false, items: null});
     const [order, setOrder] = useState({items: [], total: 0, observation: ""});
     const [showCreditCard, setShowCreditCard] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
 
     useEffect(() => {
         getCoffeeList();
+        getOrderList();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -37,6 +41,13 @@ function App() {
         const snapshot = await dataBase.collection('coffees').get()
         const tempArray = snapshot.docs.map(doc => doc.data());        
         setCoffeeList({ loading: false, items: tempArray});
+    }
+
+    async function getOrderList() {
+        setOrderList({ loading: true});
+        const snapshot = await dataBase.collection('orders').get()
+        const tempArray = snapshot.docs.map(doc => doc.data());        
+        setOrderList({ loading: false, items: tempArray});
     }
 
     function addToOrder(item) {    
@@ -97,9 +108,11 @@ function App() {
                 </If>
             </If>
             <If test={activeScreen === screens.admin }>   
-                <h2>Sou o admin</h2>
-            </If>
-            
+                <If test={orderList.items}>
+                    <OrderList orderList={orderList.items}/>  
+                </If>      
+                <CreteMenuItem />        
+            </If>        
         </div>
     );
 }
