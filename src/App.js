@@ -7,7 +7,7 @@ import Firebase from './components/Firebase';
 import CreditCard from './components/CreditCard';
 import Confirmation from './components/Confirmation';
 import OrderList from './components/OrderList';
-import CreteMenuItem from './components/CreteMenuItem';
+import CreateMenuItem from './components/CreateMenuItem';
 import If from './components/If';
 
 function App() {
@@ -88,6 +88,7 @@ function App() {
         dataBase.collection('orders').doc(`${date.toString()} - R$ ${order.total.toFixed(2)}`).set({...order, date: date});
         setShowConfirmation(true);
         setOrder({items: [], total: 0, observation: ""});
+        getOrderList();
     }
 
 
@@ -111,7 +112,7 @@ function App() {
                 <If test={orderList.items}>
                     <OrderList orderList={orderList.items}/>  
                 </If>      
-                <CreteMenuItem />        
+                <CreateMenuItem getCoffeeList={getCoffeeList} screens={screens} changeScreen={changeScreen} />        
             </If>        
         </div>
     );

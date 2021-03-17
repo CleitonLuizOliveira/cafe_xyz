@@ -227,16 +227,37 @@
   margin: 0 auto;
 }
 
-.CreateMenuItem button {
+.CreateMenuItem {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  place-content: center;
+  flex-wrap: wrap;
+}
+
+.CreateMenuItem .container {
   position: fixed;
-  bottom: 20px;
-  left: calc(50% - 130px);
+  bottom: 10px;
+  display: flex;
+  margin: auto;
+  background-color: white;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  padding: 12px;
+}
+
+.CreateMenuItem input {
+  
+  margin-right: 8px;
+  padding: 8px;
+}
+
+.CreateMenuItem button {
+  
   padding: 12px 28px;
   background-color: greenyellow;
   text-transform: uppercase;
   font-weight: bold;
   border: none;
-  border-radius: 12px;
   cursor: pointer;
 }
 
